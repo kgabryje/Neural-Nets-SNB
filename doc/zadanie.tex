@@ -8,7 +8,7 @@ Dane zadanie jest problemem odpowiedniego przyporz¹dkowania obrazków do odpowiad
 Nale¿y wiêc stworzyæ klasyfikator, który poprawnie przydzieli dany obrazek do jednej z 10 klas (ka¿da cyfra z przedzia³u $0-9$ tworzy jedn¹ klasê).
 Zadanie zostanie rozwi¹zane poprzez stworzenie sieci neuronowej przy pomocy biblioteki TensorFlow.
 
-\section{Techniczne szczegó³y zastosowanem sieci}
+\section{Techniczne szczegó³y zastosowanej sieci}
 \subsection{Ogólna struktura sieci}
 Zadanie to rozwi¹¿emy stosuj¹c sieæ neuronow¹ MLP (Multi Layer Perceptron), to jest sieæ neuronow¹ typu \textit{feedforward}, zawieraj¹c¹ jedn¹ lub wiêcej wartw ukrytych sztucznych neuronów. Jej struktura pokazana jest na rys. \ref{netstructure}.
 \newline
@@ -57,7 +57,7 @@ Zbiór MNIST sk³ada siê z 70,000 obrazków przedstawiaj¹cych pisane rêcznie cyfry.
 \subsection{Warstwa wyjœciowa}
 Warstwa wyjœciowa natomiast (\textit{output layer} na rys. \ref{netstructure}) bêdzie sk³ada³a siê z 10 neuronów: ka¿dy z nich bêdzie sygnalizowa³ stopieñ przynale¿noœci obrazka do danej klasy.
 
-Stopieñ przynale¿noœci, jako konsekwencja zastosowania sigmoidalnej funkcji wzbudzeñ neuronów, bêdzie zawiera³ siê w przedziale $<0, 1>$. Najwiêksza wartoœci ze zbioru neuronów wyjœciowych bêdzie identyfikowa³a aktualnie identyfikowan¹ cyfrê.
+Stopieñ przynale¿noœci, jako konsekwencja zastosowania sigmoidalnej funkcji wzbudzeñ neuronów, bêdzie zawiera³ siê w przedziale $<0, 1>$. Najwiêksza wartoœci ze zbioru neuronów wyjœciowych bêdzie wskazywa³a aktualnie identyfikowan¹ cyfrê.
 
 \subsection{Proces uczenia}
 Do nauki sieci zostanie wykorzystany algorytm wstecznej propagacji (ang. \textit{backpropagation}). Zadanie uczenie sieci przy pomocy tego algorytmu polaga na minimalizacji funckji straty (ang. \textit{loss funtion}) jako funkcji wag i parametrów bias. Funkcja ta zosta³a przedstawiona jako wzór  \ref{lossf}, gdzie: $w$ - wagi, $b$ - bias, $n$ - liczebnoœæ zbioru ucz¹cego, $y(x)$ - po¿¹dane wyjœcie dla danego wejœcia,  $a$ - rzeczywisty wynik dzia³ania sieci dla danego wejœcia.
