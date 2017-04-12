@@ -1,16 +1,16 @@
-\chapter{Opis projektu i jego rozwi¹zania}
+\chapter{Opis projektu i jego rozwiÄ…zania}
 \section{Temat i analiza zadania projektowego}
 
-Zadaniem projektowym jest stworzenie systemu do rozpoznawania cyfr pisanych rêcznie z u¿yciem sieci MLP. Dane bêd¹ pochodziæ ze zbioru MNIST.
+Zadaniem projektowym jest stworzenie systemu do rozpoznawania cyfr pisanych rÄ™cznie z uÅ¼yciem sieci MLP. Dane bÄ™dÄ… pochodziÄ‡ ze zbioru MNIST.
 
 
-Dane zadanie jest problemem odpowiedniego przyporz¹dkowania obrazków do odpowiadaj¹ych im kategorii na podstawie cyfr tworzonych przez ich piksele. 
-Nale¿y wiêc stworzyæ klasyfikator, który poprawnie przydzieli dany obrazek do jednej z 10 klas (ka¿da cyfra z przedzia³u $0-9$ tworzy jedn¹ klasê).
-Zadanie zostanie rozwi¹zane poprzez stworzenie sieci neuronowej przy pomocy biblioteki TensorFlow.
+Dane zadanie jest problemem odpowiedniego przyporzÄ…dkowania obrazkÃ³w do odpowiadajÄ…ych im kategorii na podstawie cyfr tworzonych przez ich piksele. 
+NaleÅ¼y wiÄ™c stworzyÄ‡ klasyfikator, ktÃ³ry poprawnie przydzieli dany obrazek do jednej z 10 klas (kaÅ¼da cyfra z przedziaÅ‚u $0-9$ tworzy jednÄ… klasÄ™).
+Zadanie zostanie rozwiÄ…zane poprzez stworzenie sieci neuronowej przy pomocy biblioteki TensorFlow.
 
-\section{Techniczne szczegó³y zastosowanej sieci}
-\subsection{Ogólna struktura sieci}
-Zadanie to rozwi¹¿emy stosuj¹c sieæ neuronow¹ MLP (Multi Layer Perceptron), to jest sieæ neuronow¹ typu \textit{feedforward}, zawieraj¹c¹ jedn¹ lub wiêcej wartw ukrytych sztucznych neuronów. Jej struktura pokazana jest na rys. \ref{netstructure}.
+\section{Techniczne szczegÃ³Å‚y zastosowanej sieci}
+\subsection{OgÃ³lna struktura sieci}
+Zadanie to rozwiÄ…Å¼emy stosujÄ…c sieÄ‡ neuronowÄ… MLP (Multi Layer Perceptron), to jest sieÄ‡ neuronowÄ… typu \textit{feedforward}, zawierajÄ…cÄ… jednÄ… lub wiÄ™cej wartw ukrytych sztucznych neuronÃ³w. Jej struktura pokazana jest na rys. \ref{netstructure}.
 \newline
 \begin{center}
 	\includegraphics[width=15cm]{utils/tikz11.png}
@@ -19,52 +19,52 @@ Zadanie to rozwi¹¿emy stosuj¹c sieæ neuronow¹ MLP (Multi Layer Perceptron), to j
 \end{center}
 
 \subsection{Sztuczny neuron}
-Pojedynczy neuron pokazany jest na rys. \ref{neuron}. Wykonuje on iloczyn skalarny wektorów tworzonych przez wartoœci wejœæ $x_j$ i odpowiadaj¹ce im wagi $w_j$ po czym dodaje do niego wielkoœæ \textit{bias}:
+Pojedynczy neuron pokazany jest na rys. \ref{neuron}. Wykonuje on iloczyn skalarny wektorÃ³w tworzonych przez wartoÅ›ci wejÅ›Ä‡ $x_j$ i odpowiadajÄ…ce im wagi $w_j$ po czym dodaje do niego wielkoÅ›Ä‡ \textit{bias}:
 
 \begin{equation}
 \sum w_jx_j + bias
 \end{equation}
 
-Tak otrzymana wartoœæ jest podawana jako argument funkcji wzbudzenia neuronu. Dopiero wynik tej funkcji jest wynikiem koñcowym neuronu, \textit{output} na rys. \ref{neuron}.
+Tak otrzymana wartoÅ›Ä‡ jest podawana jako argument funkcji wzbudzenia neuronu. Dopiero wynik tej funkcji jest wynikiem koÅ„cowym neuronu, \textit{output} na rys. \ref{neuron}.
 \newline
 \begin{center}
 	\includegraphics[width=9cm]{utils/neuron.png}
-	\captionof{figure}{Pojedyñczy neuron}
+	\captionof{figure}{PojedyÅ„czy neuron}
 	\label{neuron}
 \end{center}
 
-\subsection{Funkcja wzbudzenia neuronów}
-Zastosowana funkcja wzbudzenia naszej sieci MLP bêdzie mia³a postaæ funkcji sigmoidalnej, przedstawionej na rys. \ref{sigm}.
-Funkcja tej postaci zapewnia nam dwie korzyœci:
+\subsection{Funkcja wzbudzenia neuronÃ³w}
+Zastosowana funkcja wzbudzenia naszej sieci MLP bÄ™dzie miaÅ‚a postaÄ‡ funkcji sigmoidalnej, przedstawionej na rys. \ref{sigm}.
+Funkcja tej postaci zapewnia nam dwie korzyÅ›ci:
 
 \begin{enumerate}
 	
-	\item Ma³e zmiany wejœæ neuronów bêd¹ skutkowa³y niewielkimi zmianami na wyjœciu funkcji sigmoidalnej; pozwoli to kontrolowaæ proces uczenia (w przypadku np. funkcji pobudzenia postaci funkcji skokowej, nawet ma³e zmiany wejœæ mog¹ powodowaæ nieprzewidywalne zachowanie ca³ej sieci);
-	\item Funkcja ta jest ró¿niczkowalna, co jest kluczowe w algorytmie uczenia wykorzystuj¹cym mechanizm wstecznej propagacji (ang. \textit{backpropagation}).
+	\item MaÅ‚e zmiany wejÅ›Ä‡ neuronÃ³w bÄ™dÄ… skutkowaÅ‚y niewielkimi zmianami na wyjÅ›ciu funkcji sigmoidalnej; pozwoli to kontrolowaÄ‡ proces uczenia (w przypadku np. funkcji pobudzenia postaci funkcji skokowej, nawet maÅ‚e zmiany wejÅ›Ä‡ mogÄ… powodowaÄ‡ nieprzewidywalne zachowanie caÅ‚ej sieci);
+	\item Funkcja ta jest rÃ³Å¼niczkowalna, co jest kluczowe w algorytmie uczenia wykorzystujÄ…cym mechanizm wstecznej propagacji (ang. \textit{backpropagation}).
 	
 \end{enumerate}
 \vspace{1cm}
 \begin{center}
 	\includegraphics[width=13cm]{utils/sigm.png}
-	\captionof{figure}{Postaæ funkcji sigmoidalnej}
+	\captionof{figure}{PostaÄ‡ funkcji sigmoidalnej}
 	\label{sigm}
 \end{center}
 
 
-\subsection{Warstwa wejœciowa}
-Zbiór MNIST sk³ada siê z 70,000 obrazków przedstawiaj¹cych pisane rêcznie cyfry. Ka¿dy z obrazków ma wymiary 28x28, co daje  iloœæ  $28*28 = 784$ pikseli na ka¿dej ilustracji. Nasza sieæ bêdzie posiada³a dok³adnie tyle wejœæ - ka¿dy z neuronów warstwy wejœciowej (\textit{input layer} na rys. \ref{netstructure}) bêdzie otrzymywa³ dane z jednego i tego samego dla wszystkich danych pikselu obrazka.
+\subsection{Warstwa wejÅ›ciowa}
+ZbiÃ³r MNIST skÅ‚ada siÄ™ z 70,000 obrazkÃ³w przedstawiajÄ…cych pisane rÄ™cznie cyfry. KaÅ¼dy z obrazkÃ³w ma wymiary 28x28, co daje  iloÅ›Ä‡  $28*28 = 784$ pikseli na kaÅ¼dej ilustracji. Nasza sieÄ‡ bÄ™dzie posiadaÅ‚a dokÅ‚adnie tyle wejÅ›Ä‡ - kaÅ¼dy z neuronÃ³w warstwy wejÅ›ciowej (\textit{input layer} na rys. \ref{netstructure}) bÄ™dzie otrzymywaÅ‚ dane z jednego i tego samego dla wszystkich danych pikselu obrazka.
 
-\subsection{Warstwa wyjœciowa}
-Warstwa wyjœciowa natomiast (\textit{output layer} na rys. \ref{netstructure}) bêdzie sk³ada³a siê z 10 neuronów: ka¿dy z nich bêdzie sygnalizowa³ stopieñ przynale¿noœci obrazka do danej klasy.
+\subsection{Warstwa wyjÅ›ciowa}
+Warstwa wyjÅ›ciowa natomiast (\textit{output layer} na rys. \ref{netstructure}) bÄ™dzie skÅ‚adaÅ‚a siÄ™ z 10 neuronÃ³w: kaÅ¼dy z nich bÄ™dzie sygnalizowaÅ‚ stopieÅ„ przynaleÅ¼noÅ›ci obrazka do danej klasy.
 
-Stopieñ przynale¿noœci, jako konsekwencja zastosowania sigmoidalnej funkcji wzbudzeñ neuronów, bêdzie zawiera³ siê w przedziale $<0, 1>$. Najwiêksza wartoœci ze zbioru neuronów wyjœciowych bêdzie wskazywa³a aktualnie identyfikowan¹ cyfrê.
+StopieÅ„ przynaleÅ¼noÅ›ci, jako konsekwencja zastosowania sigmoidalnej funkcji wzbudzeÅ„ neuronÃ³w, bÄ™dzie zawieraÅ‚ siÄ™ w przedziale $<0, 1>$. NajwiÄ™ksza wartoÅ›ci ze zbioru neuronÃ³w wyjÅ›ciowych bÄ™dzie wskazywaÅ‚a aktualnie identyfikowanÄ… cyfrÄ™.
 
 \subsection{Proces uczenia}
-Do nauki sieci zostanie wykorzystany algorytm wstecznej propagacji (ang. \textit{backpropagation}). Zadanie uczenie sieci przy pomocy tego algorytmu polaga na minimalizacji funckji straty (ang. \textit{loss funtion}) jako funkcji wag i parametrów bias. Funkcja ta zosta³a przedstawiona jako wzór  \ref{lossf}, gdzie: $w$ - wagi, $b$ - bias, $n$ - liczebnoœæ zbioru ucz¹cego, $y(x)$ - po¿¹dane wyjœcie dla danego wejœcia,  $a$ - rzeczywisty wynik dzia³ania sieci dla danego wejœcia.
+Do nauki sieci zostanie wykorzystany algorytm wstecznej propagacji (ang. \textit{backpropagation}). Zadanie uczenie sieci przy pomocy tego algorytmu polaga na minimalizacji funckji straty (ang. \textit{loss funtion}) jako funkcji wag i parametrÃ³w bias. Funkcja ta zostaÅ‚a przedstawiona jako wzÃ³r  \ref{lossf}, gdzie: $w$ - wagi, $b$ - bias, $n$ - liczebnoÅ›Ä‡ zbioru uczÄ…cego, $y(x)$ - poÅ¼Ä…dane wyjÅ›cie dla danego wejÅ›cia,  $a$ - rzeczywisty wynik dziaÅ‚ania sieci dla danego wejÅ›cia.
 
-Algorytm ten polega na aplikowaniu do wag drobnych poprawek $\Delta w$ wyliczonych ze wzoru \ref{deltav}, gdzie $ \nabla C$ jest gradientem funkcji strat a $\eta$ jest hiperparametrem wyra¿aj¹cym wielkoœæ kroku. 
+Algorytm ten polega na aplikowaniu do wag drobnych poprawek $\Delta w$ wyliczonych ze wzoru \ref{deltav}, gdzie $ \nabla C$ jest gradientem funkcji strat a $\eta$ jest hiperparametrem wyraÅ¼ajÄ…cym wielkoÅ›Ä‡ kroku. 
 
-Skrótowo mówi¹c, po ka¿dej iteracji, to jest obliczeniu wyniku dla kolejno wszystkich danych ucz¹cych, obliczana jest funkcja $C(w,b)$ i jej gradient, a nastêpnie zmieniane s¹ wagi w kierunku przeciwnym do  gradientu funcji strat o krok $\eta$.
+SkrÃ³towo mÃ³wiÄ…c, po kaÅ¼dej iteracji, to jest obliczeniu wyniku dla kolejno wszystkich danych uczÄ…cych, obliczana jest funkcja $C(w,b)$ i jej gradient, a nastÄ™pnie zmieniane sÄ… wagi w kierunku przeciwnym do  gradientu funcji strat o krok $\eta$.
 
 \begin{eqnarray}  C(w,b) \equiv
 \frac{1}{2n} \sum_x \| y(x) - a\|^2.
