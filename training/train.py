@@ -9,11 +9,12 @@ image_size = 28
 num_labels = 10
 batch_size = 128
 hidden_nodes = 500
-num_steps = 3001
+num_steps = 5001
 beta = 0.0005
 init_learning_rate = 0.5
 decay_steps = 800
 decay_rate = 0.8
+keep_probability = 0.9
 
 data_path = path.join('..', 'data')
 filelist = ['train_images', 'train_labels', 'validation_images', 'validation_labels', 'test_images', 'test_labels']
@@ -75,6 +76,8 @@ with graph.as_default():
     tf_valid_dataset = tf.constant(validation_images, dtype=tf.float32)
     tf_test_dataset = tf.constant(test_images, dtype=tf.float32)
 
+    keep_prob = tf.placeholder(tf.float32)
+
     # Variables.
     weights_layer1 = generate_weights([image_size * image_size, hidden_nodes])
     biases_layer1 = generate_biases([hidden_nodes])
@@ -87,9 +90,9 @@ with graph.as_default():
 
     global_step = tf.Variable(0, trainable=False)
 
-    layer1 = tf.nn.tanh(tf.matmul(tf_train_dataset, weights_layer1) + biases_layer1)
-    layer2 = tf.nn.tanh(tf.matmul(layer1, weights_layer2) + biases_layer2)
-    logits = tf.matmul(layer2, weights_output) + biases_output
+    layer1 = tf.nn.dropout(tf.nn.tanh(tf.matmul(tf_train_dataset, weights_layer1) + biases_layer1), keep_prob)
+    layer2 = tf.nn.dropout(tf.nn.tanh(tf.matmul(layer1, weights_layer2) + biases_layer2), keep_prob)
+    logits = tf.nn.dropout(tf.matmul(layer2, weights_output) + biases_output, keep_prob)
 
     loss = tf.reduce_mean(
         tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=tf_train_labels)
@@ -118,7 +121,7 @@ with tf.Session(graph=graph) as session:
         offset = (step * batch_size) % (train_labels.shape[0] - batch_size)
         batch_data = train_images[offset:(offset + batch_size), :]
         batch_labels = train_labels[offset:(offset + batch_size), :]
-        feed_dict = {tf_train_dataset: batch_data, tf_train_labels: batch_labels}
+        feed_dict = {tf_train_dataset: batch_data, tf_train_labels: batch_labels, keep_prob: keep_probability}
         _, l, predictions = session.run(
             [optimizer, loss, train_prediction], feed_dict=feed_dict)
         if step % 500 == 0:
