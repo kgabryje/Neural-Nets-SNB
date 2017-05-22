@@ -4,6 +4,11 @@ import tensorflow as tf
 from os import path
 import pickle
 import zipfile
+import matplotlib
+import sys
+if sys.platform == 'linux':
+    matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 image_size = 28
 num_labels = 10
@@ -113,7 +118,7 @@ with graph.as_default():
     test_logits = tf.matmul(test_layer2, weights_output) + biases_output
     test_prediction = tf.nn.softmax(test_logits)
 
-
+losses = []
 with tf.Session(graph=graph) as session:
     tf.initialize_all_variables().run()
     print("Initialized")
@@ -124,9 +129,14 @@ with tf.Session(graph=graph) as session:
         feed_dict = {tf_train_dataset: batch_data, tf_train_labels: batch_labels, keep_prob: keep_probability}
         _, l, predictions = session.run(
             [optimizer, loss, train_prediction], feed_dict=feed_dict)
+        losses.append(l)
         if step % 500 == 0:
             print("Minibatch loss at step %d: %f" % (step, l))
             print("Minibatch accuracy: %.1f%%" % accuracy(predictions, batch_labels))
             print("Validation accuracy: %.1f%%" % accuracy(
                 valid_prediction.eval(), validation_labels))
     print("Test accuracy: %.1f%%" % accuracy(test_prediction.eval(), test_labels))
+
+plt.ion()
+plt.plot(losses)
+plt.show(block=True)
