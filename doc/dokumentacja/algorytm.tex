@@ -1,0 +1,109 @@
+\section{Algorytm uczenia}
+Testy w poprzednich sekcjach były przeprowadzane z użyciem algorytmu SGD (Stochastic Gradient Descent). Tabela \ref{table:momentum} przedstawia wyniki dla algorytmu wykorzystującego pęd. Jak widać, dla niskich wartości parametru wyniki są praktycznie identyczne jak dla algorytmu SGD. Z kolei dla wyższych wartości parametru, wyniki okazują się być nieznacznie gorsze. Z uwagi na brak poprawy rezultatów mimo wprowadzenia dodatkowego parametru, kolejne testy będą przeprowadzane z wykorzystaniem algorytmu SGD.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Parametr pędu & Wyniki \\ \hline
+0,001 & \makecell{Zbiór uczący: 98,4\% \\ Zbiór testowy: 98\%} \\ \hline
+0,005 & \makecell{Zbiór uczący: 98,4\% \\ Zbiór testowy: 98,1\%} \\ \hline
+0,01 & \makecell{Zbiór uczący: 99,2\% \\ Zbiór testowy: 98\%} \\ \hline
+0,05 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 98\%} \\ \hline
+0,1 & \makecell{Zbiór uczący: 96,9\% \\ Zbiór testowy: 98\%} \\ \hline
+0,2 & \makecell{Zbiór uczący: 96,7\% \\ Zbiór testowy: 98\%} \\ \hline
+0,3 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 97,7\%} \\ \hline
+0,3 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 97,5\%} \\ \hline
+\end{tabular}
+\caption{Wyniki dla algorytmu wykorzystującego pęd}
+\label{table:momentum}
+\end{table}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/mom_001.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Parametr pędu - \num{0,001}}
+\label{fig:mom_001}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/mom_01.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Parametr pędu - \num{0,01}}
+\label{fig:mom_01}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/mom_1.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Parametr pędu - \num{0,1}}
+\label{fig:mom_1}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/mom_1.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Parametr pędu - \num{0,2}}
+\label{fig:mom_2}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/mom_5.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Parametr pędu - \num{0,4}}
+\label{fig:mom_3}
+\end{figure}

@@ -1,0 +1,128 @@
+\section{Batch size}
+Poprzednie eksperymenty były przeprowadzane dla batch size (wielkości serii) równej 128. Tabela \ref{table:batchsize} przedstawia wyniki dla innych wartości tego parametru. Jak widać, mała wielkość serii powoduje spadek jakości klasyfikacji, co prawdopodobnie spowodowane jest tym, że sieć dopasowuje się do danych uczących.
+
+Duży batch size polepsza działanie sieci neuronowej, ale sprawia, że nauka trwa kilkukrotnie dłużej. Wielkości 256 lub 512 stanowią dobry kompromis między szybkością nauki a dobrymi wynikami.
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Batch size & Wyniki \\ \hline
+16 & \makecell{Zbiór uczący: 100\% \\ Zbiór testowy: 92,9\%} \\ \hline
+32 & \makecell{Zbiór uczący: 100\% \\ Zbiór testowy: 96,8\%} \\ \hline
+64 & \makecell{Zbiór uczący: 92,2\% \\ Zbiór testowy: 97,5\%} \\ \hline
+256 & \makecell{Zbiór uczący: 99,6\% \\ Zbiór testowy: 98\%} \\ \hline
+512 & \makecell{Zbiór uczący: 98,6\% \\ Zbiór testowy: 98,3\%} \\ \hline
+1024 & \makecell{Zbiór uczący: 98,1\% \\ Zbiór testowy: 98,2\%} \\ \hline
+\end{tabular}
+\caption{Wyniki dla różnych wielkości serii}
+\label{table:batchsize}
+\end{table}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/batch16.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Batch size = 16}
+\label{fig:batch16}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/batch32.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Batch size = 32}
+\label{fig:batch32}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/batch64.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Batch size = 64}
+\label{fig:batch64}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/batch256.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Batch size = 256}
+\label{fig:batch256}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/batch512.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Batch size = 512}
+\label{fig:batch512}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/batch1024.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Batch size = 1024}
+\label{fig:batch1024}
+\end{figure}
