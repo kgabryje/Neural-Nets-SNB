@@ -1,0 +1,316 @@
+\section{Struktura sieci}
+Wyniki przedstawione w tabeli \ref{table:struktura} pozwalają stwierdzić, że różnice w jakości rozpoznawania cyfry przez sieć w zależności od jej struktury są niewielkie. Sieć prawidłowo rozpoznaje cyfrę w około $98\%$ przypadków. Analizując wykresy błędów można jednak zauważyć, że im więcej neuronów w sieci, tym mniejsza wariancja funkcji błędu. Tę zależność wyraźnie widać, porównująć przykładowo wykresy \ref{fig:w_2_n_100_100} i \ref{fig:w_2_n_400_400}. Biorąc tę obserwację pod uwagę, w kolejnych eksperymentach używana będzie struktura sieci z 2 warstwami ukrytymi po 400 neuronów w każdej.
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Ilość warstw ukrytych & Ilość neuronów & Wyniki \\ \hline
+2 & 100, 50 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 97,5\%} \\ \hline
+2 & 100, 100 & \makecell{Zbiór uczący: 99,2\% \\ Zbiór testowy: 97,8\%} \\ \hline
+2 & 100, 150 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 97,9\%} \\ \hline
+2 & 200, 100 & \makecell{Zbiór uczący: 98,4\% \\ Zbiór testowy: 97,9\%} \\ \hline
+2 & 200, 200 & \makecell{Zbiór uczący: 98,4\% \\ Zbiór testowy: 98\%} \\ \hline
+2 & 200, 300 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 97,9\%} \\ \hline
+2 & 400, 200 & \makecell{Zbiór uczący: 98,4\% \\ Zbiór testowy: 98\%} \\ \hline
+2 & 400, 400 & \makecell{Zbiór uczący: 98,4\% \\ Zbiór testowy: 98\%} \\ \hline
+2 & 400, 600 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 97,9\%} \\ \hline
+
+3 & 100, 50, 10 & \makecell{Zbiór uczący: 96,9\% \\ Zbiór testowy: 97,7\%} \\ \hline
+3 & 100, 100, 50 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 98\%} \\ \hline
+3 & 100, 100, 100 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 97,7\%} \\ \hline
+3 & 200, 100, 100 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 98\%} \\ \hline
+3 & 200, 200, 100 & \makecell{Zbiór uczący: 98,4\% \\ Zbiór testowy: 97,9\%} \\ \hline
+3 & 200, 200, 200 & \makecell{Zbiór uczący: 99,2\% \\ Zbiór testowy: 98,1\%} \\ \hline
+3 & 400, 200, 200 & \makecell{Zbiór uczący: 97,7\% \\ Zbiór testowy: 98,1\%} \\ \hline
+\end{tabular}
+\caption{Dane po 5000 kroków}
+\label{table:struktura}
+\end{table}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_100_50.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (100, 50) neuronów}
+\label{fig:w_2_n_100_50}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_100_100.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (100, 100) neuronów}
+\label{fig:w_2_n_100_100}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_100_150.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (100, 150) neuronów}
+\label{fig:w_2_n_100_150}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_200_100.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (200, 100) neuronów}
+\label{fig:w_1_n_200_100}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_200_200.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (200, 200) neuronów}
+\label{fig:w_1_n_200_200}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_200_300.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (200, 300) neuronów}
+\label{fig:w_1_n_200_300}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_400_200.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (400, 200) neuronów}
+\label{fig:w_2_n_400_200}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_400_400.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (400, 400) neuronów}
+\label{fig:w_2_n_400_400}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_2_n_400_600.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{2 warstwy ukryte, (400, 600) neuronów}
+\label{fig:w_2_n_400_600}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_3_n_100_50_10.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{3 warstwy ukryte, (100, 50, 10) neuronów}
+\label{fig:w_3_n_100_50_10}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_3_n_100_100_50.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{3 warstwy ukryte, (100, 100, 50) neuronów}
+\label{fig:w_3_n_100_100_50}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_3_n_100_100_100.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{3 warstwy ukryte, (100, 100, 100) neuronów}
+\label{fig:w_3_n_100_100_100}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_3_n_200_100_100.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{3 warstwy ukryte, (200, 100, 100) neuronów}
+\label{fig:w_3_n_200_100_100}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_3_n_200_200_100.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{3 warstwy ukryte, (200, 200, 100) neuronów}
+\label{fig:w_3_n_200_200_100}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_3_n_200_200_200.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{3 warstwy ukryte, (200, 200, 200) neuronów}
+\label{fig:w_3_n_200_200_200}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={kroki},
+ylabel={Błąd},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/w_3_n_400_200_200.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{3 warstwy ukryte, (400, 200, 200) neuronów}
+\label{fig:w_3_n_400_200_200}
+\end{figure}

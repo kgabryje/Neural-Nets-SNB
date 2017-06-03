@@ -1,0 +1,56 @@
+{\let\clearpage\relax \chapter{Implementacja sieci}}
+\section{Funkcje aktywacji}
+Przetestowanymi przez nas funkcjami aktywacji neuronów są funkcja sigmoidalna(wykres \ref{fig:sig}) oraz ReLU, która przedstawiona jest na wykresie \ref{fig:relu}.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={x},
+ylabel={sig(x)},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/sig.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Sigmoidalna funkcja aktywacji}
+\label{fig:sig}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.8\textwidth,
+xlabel={x},
+ylabel={$ReLU(x) = max(0,x)$},
+/pgf/number format/.cd,
+use comma,
+1000 sep={}
+]
+\addplot[blue,semithick] file {wykresy/relu.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Funkcja aktywacji ReLU}
+\label{fig:relu}
+\end{figure}
+
+\section{Struktura sieci}
+Warstwa wejściowa składa się z 784 neuronów, po jednym na każdy piksel obrazka z cyfrą. W trakcie eksperymentów zbadane zostały struktury sieci z dwiema i trzema warstwami ukrytymi. Warstwę wyjściową tworzy 10 neuronów, gdyż oczekujemy, że sieć zwróci jedną z dziesięciu cyfr. Na warstwie wyjściowej używana jest funkcja $softmax$, dana wzorem \ref{eq:softmax}, dzięki której wyniki możemy interpretować jako prawdopodobieństwa.
+\begin{equation} \label{eq:softmax}
+\sigma(x)_j = \frac{e^{x_j}}{\sum\limits_{i=1}^n e^{x_i}}
+\end{equation}
+
+\section{Błąd sieci}
+W celu obliczenia błędu warstwy wyjściowej stosowana jest metoda cross entropy, dana wzorem \ref{eq:crossentropy}.
+\begin{equation} \label{eq:crossentropy}
+L(w) = -\frac{1}{N} \sum\limits_{n=1}^N [y_nlog\hat{y}_n + (1-y_n)log(1-\hat{y}_n)]
+\end{equation}
+
+\section{Proces uczenia}
+Testowanymi algorytmami uczącymi są stochastyczny spadek gradientu oraz jego modyfikacja wykorzystująca pęd. Ponadto, zastosowaliśmy technikę $dropout$ polegającą na usuwaniu (zerowaniu) losowych połączeń między neuronami sąsiadujących warstw. Ma to na celu zapobiegnięcie zjawisku dopasowywania się sieci do danych uczących. Stosowane przez nas prawdopodobieństwo zachowania połączenia wynosi $0,95$. 
+
+Zastosowaliśmy technikę wykładniczego spadku wartości kroku, dzięki czemu możemy użyć dużej wartości początkowej kroku. Sprawia to, że sieć uczy się szybko na początku eksperymentu, a zwalnia gdy jest w pobliżu optymalnego rozwiązania.
